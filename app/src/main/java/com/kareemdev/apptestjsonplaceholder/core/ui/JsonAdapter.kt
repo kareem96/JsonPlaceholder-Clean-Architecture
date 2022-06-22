@@ -23,6 +23,7 @@ class JsonAdapter : RecyclerView.Adapter<JsonAdapter.ListViewHolder>() {
         fun bind(data: Json){
             with(binding){
                 tvItemTitle.text = data.title
+                tvItemUserId.text = data.id.toString()
             }
         }
         init {

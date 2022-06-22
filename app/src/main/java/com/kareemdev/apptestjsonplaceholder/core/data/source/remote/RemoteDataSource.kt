@@ -7,6 +7,7 @@ import com.kareemdev.apptestjsonplaceholder.core.data.source.remote.network.ApiR
 import com.kareemdev.apptestjsonplaceholder.core.data.source.remote.network.ApiService
 import com.kareemdev.apptestjsonplaceholder.core.data.source.remote.response.JsonResponse
 import com.kareemdev.apptestjsonplaceholder.core.data.source.remote.response.ListJsonResponse
+import org.json.JSONArray
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,7 +26,19 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
         val resultData = MutableLiveData<ApiResponse<List<JsonResponse>>>()
 
         val client = apiService.getList()
-        client.enqueue(object : Callback<ListJsonResponse>{
+        client.enqueue(object : Callback<List<JsonResponse>>{
+            override fun onResponse(call: Call<List<JsonResponse>>, response: Response<List<JsonResponse>>) {
+                val dataArray = response.body()
+                resultData.value = if (dataArray != null) ApiResponse.Success(dataArray) else ApiResponse.Empty
+            }
+
+            override fun onFailure(call: Call<List<JsonResponse>>, t: Throwable) {
+                resultData.value = ApiResponse.Error(t.message.toString())
+                Log.e("RemoteDataSource: ", t.message.toString())
+            }
+
+        })
+        /*client.enqueue(object : Callback<ListJsonResponse>{
             override fun onResponse(call: Call<ListJsonResponse>, response: Response<ListJsonResponse>) {
                 val dataArray = response.body()?.places
                 resultData.value = if(dataArray != null) ApiResponse.Success(dataArray) else ApiResponse.Empty
@@ -36,7 +49,7 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
                 Log.e("RemoteDataSource: ", t.message.toString())
             }
 
-        })
+        })*/
         return resultData
     }
 }

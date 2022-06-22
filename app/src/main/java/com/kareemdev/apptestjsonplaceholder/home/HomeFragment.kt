@@ -1,5 +1,7 @@
 package com.kareemdev.apptestjsonplaceholder.home
 
+import android.content.Intent
+import android.nfc.NfcAdapter.EXTRA_DATA
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +14,7 @@ import com.kareemdev.apptestjsonplaceholder.core.data.Resource
 import com.kareemdev.apptestjsonplaceholder.core.ui.JsonAdapter
 import com.kareemdev.apptestjsonplaceholder.core.ui.ViewModelFactory
 import com.kareemdev.apptestjsonplaceholder.databinding.FragmentHomeBinding
+import com.kareemdev.apptestjsonplaceholder.detail.DetailActivity
 
 
 /**
@@ -35,7 +38,11 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         if(activity != null){
             val jsonAdapter = JsonAdapter()
-            jsonAdapter.onItemClick = {}
+            jsonAdapter.onItemClick = {
+                /*val intent = Intent(activity, DetailActivity::class.java)
+                intent.putExtra(DetailActivity.EXTRA_DATA, selectedData)
+                startActivity(intent)*/
+            }
             val factory = ViewModelFactory.getInstance(requireActivity())
             homeViewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
 

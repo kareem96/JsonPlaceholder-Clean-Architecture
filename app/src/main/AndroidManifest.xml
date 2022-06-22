@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kareemdev.apptestjsonplaceholder">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,9 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppTestJsonplaceholder">
         <activity
+            android:name=".detail.DetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppTestJsonplaceholder.NoActionBar"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.AppTestJsonplaceholder.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

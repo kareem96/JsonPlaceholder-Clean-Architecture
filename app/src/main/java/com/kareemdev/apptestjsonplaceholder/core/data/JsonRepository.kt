@@ -43,7 +43,8 @@ class JsonRepository private constructor(
             remoteDataSource.getAllJson()
 
         override fun saveCallResult(data: List<JsonResponse>) {
-            TODO("Not yet implemented")
+            val jsonList = DataMapper.mapResponsesToEntities(data)
+            localDataSource.insertJson(jsonList)
         }
 
     }.asLiveData()

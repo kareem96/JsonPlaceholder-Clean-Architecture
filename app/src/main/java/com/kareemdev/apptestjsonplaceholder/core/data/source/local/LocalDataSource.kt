@@ -15,4 +15,6 @@ class LocalDataSource private constructor(private val jsonDao: JsonDao){
     }
 
     fun getAllJson(): LiveData<List<JsonEntity>> = jsonDao.getAllJson()
+
+    fun insertJson(jsonList: List<JsonEntity>) = jsonDao.insertJson(jsonList)
 }
